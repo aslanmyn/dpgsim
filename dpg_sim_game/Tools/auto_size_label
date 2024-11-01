@@ -1,0 +1,30 @@
+class_name AutoSizeLabel extends Label
+
+export var max_font_size = 56
+
+var custom_font: DynamicFont
+
+
+func _ready():
+	var current_font = get_font("font", "Label")
+	custom_font = DynamicFont.new()
+	custom_font.font_data = current_font.font_data
+	add_font_override("font", custom_font)
+
+	clip_text = true
+	connect("item_rect_changed", self, "_on_item_rect_changed")
+
+
+func update_font_size() -> void:
+	var font_size = custom_font.get_height()
+
+	for i in 20:
+		var text_size = custom_font.get_string_size(text)
+		if text_size > floor(rect_size.x):
+			font_size -= 1
+		elif font_size < max_font_size:
+			font_size += 1
+
+
+func _on_item_rect_changed() -> void:
+	update_font_size()
