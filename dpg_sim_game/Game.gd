@@ -1,8 +1,9 @@
 class_name MainGame
 extends Node2D
 
+# Dependencies
 onready var gameTooltip = $Tooltip
-onready var dateCounter = $Header/DateCounter
+onready var dateCounter = $MainSession/Header/HudLeft/DateCounter
 onready var teamScreen = $TeamScreen
 onready var soundManager = $Sounds
 
