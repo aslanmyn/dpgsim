@@ -9,9 +9,10 @@ onready var soundManager = $Sounds
 
 func _ready():
 	global.game = self
-	yield($WebInterface.ConnectToWeb(), "completed")
-	yield($WebInterface.LoadFiles(), "completed")
 
+	# yield($WebInterface.ConnectToWeb(), "completed")
+	# yield($WebInterface.LoadFiles(), "completed")
+		
 	$MainMenu.visible = true
 	$MainMenu.Start()
 	$PauseMenu.Start()

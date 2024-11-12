@@ -1,22 +1,31 @@
 extends Control
 
+# Dependencies
+onready var music = $Music
+onready var music_label = $Music/Label
+onready var sfx = $SFX
+onready var sfx_label = $SFX/Label
+onready var back = $Back
+
+signal on_back
+
 func Start():
-	$Music.Start()
-	$SFX.Start()
+	music.Start()
+	sfx.Start()
 	$Back.Start()
 	UpdateSettings()
 
 func UpdateSettings():
-	$Music/Label.text = trans.local("MUSIC") + ": "
+	music_label.text = trans.local("MUSIC") + ": "
 	if global.musicOn:
-		$Music/Label.text += trans.local("ON")
+		music_label.text += trans.local("ON")
 	else:
-		$Music/Label.text += trans.local("OFF")
-	$SFX/Label.text = trans.local("SFX") + ": "
+		music_label.text += trans.local("OFF")
+	sfx_label.text = trans.local("SFX") + ": "
 	if global.sfxOn:
-		$SFX/Label.text += trans.local("ON")
+		sfx_label.text += trans.local("ON")
 	else:
-		$SFX/Label.text += trans.local("OFF")
+		sfx_label.text += trans.local("OFF")
 
 
 
@@ -32,4 +41,5 @@ func _on_SFX_buttonPressed():
 
 func _on_Back_buttonPressed():
 	visible = false
-	$"..".ShowMainMenu(true)
+	emit_signal("on_back")
+	# main_menu.ShowMainMenu(true)
